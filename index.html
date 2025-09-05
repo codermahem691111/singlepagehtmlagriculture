@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agricultural Information Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#22c55e',
+                        secondary: '#16a34a',
+                        accent: '#84cc16'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scroll-smooth { scroll-behavior: smooth; }
+        .fade-in { animation: fadeIn 0.6s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .hover-scale { transition: transform 0.3s ease; }
+        .hover-scale:hover { transform: scale(1.05); }
+        .bg-pattern { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="50" cy="50" r="2" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>'); }
+    </style>
+</head>
+<body class="bg-gray-50 scroll-smooth">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">🌾</span>
+                    </div>
+                    <span class="text-xl font-bold text-gray-800">AgriHub</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#home" class="text-gray-700 hover:text-primary transition-colors">Home</a>
+                    <a href="#guides" class="text-gray-700 hover:text-primary transition-colors">Farming Guides</a>
+                    <a href="#crops" class="text-gray-700 hover:text-primary transition-colors">Crop Details</a>
+                    <a href="#pest-control" class="text-gray-700 hover:text-primary transition-colors">Pest Control</a>
+                    <a href="#contact" class="text-gray-700 hover:text-primary transition-colors">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-primary">Home</a>
+                <a href="#guides" class="block py-2 text-gray-700 hover:text-primary">Farming Guides</a>
+                <a href="#crops" class="block py-2 text-gray-700 hover:text-primary">Crop Details</a>
+                <a href="#pest-control" class="block py-2 text-gray-700 hover:text-primary">Pest Control</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-primary">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-20 bg-gradient-to-br from-primary to-secondary bg-pattern min-h-screen flex items-center">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-white fade-in">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                        Agricultural Information Hub
+                    </h1>
+                    <p class="text-xl mb-8 text-green-100">
+                        Your comprehensive resource for modern farming practices, crop management, and sustainable agriculture. Join thousands of farmers revolutionizing their harvest.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#guides" class="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all hover-scale text-center">
+                            Explore Guides
+                        </a>
+                        <a href="#contact" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primary transition-all text-center">
+                            Get Expert Help
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="w-full h-96 bg-white bg-opacity-20 rounded-3xl p-8 backdrop-blur-sm">
+                        <div class="grid grid-cols-2 gap-6 h-full">
+                            <div class="bg-white bg-opacity-30 rounded-2xl p-6 flex flex-col items-center justify-center hover-scale">
+                                <div class="text-4xl mb-3">🌱</div>
+                                <div class="text-white font-semibold text-center">Farming Guides</div>
+                            </div>
+                            <div class="bg-white bg-opacity-30 rounded-2xl p-6 flex flex-col items-center justify-center hover-scale">
+                                <div class="text-4xl mb-3">🌾</div>
+                                <div class="text-white font-semibold text-center">Crop Details</div>
+                            </div>
+                            <div class="bg-white bg-opacity-30 rounded-2xl p-6 flex flex-col items-center justify-center hover-scale">
+                                <div class="text-4xl mb-3">🐛</div>
+                                <div class="text-white font-semibold text-center">Pest Control</div>
+                            </div>
+                            <div class="bg-white bg-opacity-30 rounded-2xl p-6 flex flex-col items-center justify-center hover-scale">
+                                <div class="text-4xl mb-3">👨‍🌾</div>
+                                <div class="text-white font-semibold text-center">Expert Support</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Farming Guides Section -->
+    <section id="guides" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Farming Guides & Tutorials</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Comprehensive guides covering various farming practices, techniques, and methodologies to maximize your harvest and sustainability.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-gray-50 rounded-2xl p-8 hover-scale hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">🌾</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Crop Types</h3>
+                    <p class="text-gray-600 mb-6">Specialized guides for grains, fruits, vegetables, and cash crops with variety-specific techniques.</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                            Grain Cultivation Methods
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                            Fruit Orchard Management
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                            Vegetable Garden Planning
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-2xl p-8 hover-scale hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">📅</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Seasonal Guides</h3>
+                    <p class="text-gray-600 mb-6">Season-specific farming strategies, planting calendars, and weather-adaptive techniques.</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-secondary rounded-full mr-3"></span>
+                            Spring Planting Guide
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-secondary rounded-full mr-3"></span>
+                            Summer Care Techniques
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-secondary rounded-full mr-3"></span>
+                            Harvest & Storage Methods
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-2xl p-8 hover-scale hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">⚙️</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Farming Methods</h3>
+                    <p class="text-gray-600 mb-6">Modern techniques including organic farming, hydroponics, and precision agriculture.</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-accent rounded-full mr-3"></span>
+                            Organic Farming Practices
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-accent rounded-full mr-3"></span>
+                            Precision Agriculture
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-accent rounded-full mr-3"></span>
+                            Sustainable Techniques
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-primary to-secondary rounded-3xl p-8 md:p-12 text-white">
+                <h3 class="text-3xl font-bold mb-6">Step-by-Step Instructions & Best Practices</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-xl font-semibold mb-4">What You'll Learn:</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">✅</span>
+                                <span>Detailed planting procedures and timing</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">✅</span>
+                                <span>Soil preparation and nutrient management</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">✅</span>
+                                <span>Irrigation and water management systems</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">✅</span>
+                                <span>Harvesting techniques and post-harvest handling</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold mb-4">Expert Tips Include:</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">💡</span>
+                                <span>Cost-effective farming solutions</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">💡</span>
+                                <span>Yield optimization strategies</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">💡</span>
+                                <span>Risk management and insurance</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">💡</span>
+                                <span>Market trends and crop selection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crop Details Section -->
+    <section id="crops" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Comprehensive Crop Information</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Detailed profiles of different crops including varieties, cultivation methods, soil requirements, and harvesting techniques.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
+                <!-- Grains Category -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg hover-scale transition-all">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">🌾</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Grains</h3>
+                        <p class="text-gray-600 mb-6">Rice, wheat, corn, barley, and other cereal crops with detailed cultivation guides.</p>
+                        <div class="space-y-3 text-left">
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-semibold text-sm text-gray-800">Rice Varieties</div>
+                                <div class="text-xs text-gray-600">Basmati, Jasmine, Short-grain</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-semibold text-sm text-gray-800">Wheat Types</div>
+                                <div class="text-xs text-gray-600">Winter wheat, Spring wheat, Durum</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-semibold text-sm text-gray-800">Soil Requirements</div>
+                                <div class="text-xs text-gray-600">Well-drained, pH 6.0-7.5</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fruits Category -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg hover-scale transition-all">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">🍎</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Fruits</h3>
+                        <p class="text-gray-600 mb-6">Tree fruits, berries, and tropical fruits with orchard management techniques.</p>
+                        <div class="space-y-3 text-left">
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-semibold text-sm text-gray-800">Tree Fruits</div>
+                                <div class="text-xs text-gray-600">Apple, Orange, Mango, Peach</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-semibold text-sm text-gray-800">Berry Crops</div>
+                                <div class="text-xs text-gray-600">Strawberry, Blueberry, Raspberry</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-semibold text-sm text-gray-800">Growing Season</div>
+                                <div class="text-xs text-gray-600">Perennial, seasonal harvest</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vegetables Category -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg hover-scale transition-all">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">🥕</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Vegetables</h3>
+                        <p class="text-gray-600 mb-6">Root vegetables, leafy greens, and seasonal vegetables with garden planning guides.</p>
+                        <div class="space-y-3 text-left">
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-semibold text-sm text-gray-800">Leafy Greens</div>
+                                <div class="text-xs text-gray-600">Spinach, Lettuce, Kale, Cabbage</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-semibold text-sm text-gray-800">Root Vegetables</div>
+                                <div class="text-xs text-gray-600">Carrot, Potato, Radish, Onion</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-semibold text-sm text-gray-800">Harvest Time</div>
+                                <div class="text-xs text-gray-600">30-120 days from planting</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cash Crops Category -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg hover-scale transition-all">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">💰</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Cash Crops</h3>
+                        <p class="text-gray-600 mb-6">High-value commercial crops including cotton, tobacco, and specialty crops.</p>
+                        <div class="space-y-3 text-left">
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-semibold text-sm text-gray-800">Fiber Crops</div>
+                                <div class="text-xs text-gray-600">Cotton, Jute, Hemp</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-semibold text-sm text-gray-800">Oil Seeds</div>
+                                <div class="text-xs text-gray-600">Sunflower, Soybean, Canola</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-semibold text-sm text-gray-800">Market Value</div>
+                                <div class="text-xs text-gray-600">High profit potential</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Crop Profiles -->
+            <div class="mt-16 bg-white rounded-3xl p-8 md:p-12 shadow-lg">
+                <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">Detailed Crop Profiles</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">📸</span>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-800 mb-3">Visual Identification</h4>
+                        <p class="text-gray-600">High-quality images showing plant stages, leaves, fruits, and common varieties for easy identification.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">🥗</span>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-800 mb-3">Nutritional Values</h4>
+                        <p class="text-gray-600">Complete nutritional breakdown including vitamins, minerals, and health benefits of each crop.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">🔄</span>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-800 mb-3">Potential Uses</h4>
+                        <p class="text-gray-600">Commercial applications, food processing, industrial uses, and value-added product opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pest Control Section -->
+    <section id="pest-control" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Pest Control Strategies</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Integrated Pest Management (IPM) strategies including prevention, biological controls, and organic remedies for sustainable farming.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 mb-16">
+                <!-- IPM Strategies -->
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">🌱</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">IPM Strategies</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <h4 class="font-semibold text-gray-800 mb-2">Prevention First</h4>
+                            <p class="text-sm text-gray-600">Crop rotation, resistant varieties, and cultural practices to prevent pest establishment.</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <h4 class="font-semibold text-gray-800 mb-2">Monitoring Systems</h4>
+                            <p class="text-sm text-gray-600">Regular scouting, pest traps, and threshold-based decision making.</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <h4 class="font-semibold text-gray-800 mb-2">Integrated Approach</h4>
+                            <p class="text-sm text-gray-600">Combining multiple control methods for maximum effectiveness.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biological Controls -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">🐞</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">Biological Controls</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <h4 class="font-semibold text-gray-800 mb-2">Beneficial Insects</h4>
+                            <p class="text-sm text-gray-600">Ladybugs, parasitic wasps, and predatory mites for natural pest control.</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <h4 class="font-semibold text-gray-800 mb-2">Microbial Agents</h4>
+                            <p class="text-sm text-gray-600">Beneficial bacteria, fungi, and viruses targeting specific pests.</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <h4 class="font-semibold text-gray-800 mb-2">Habitat Management</h4>
+                            <p class="text-sm text-gray-600">Creating environments that support beneficial organisms.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organic Remedies -->
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">🌿</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">Organic Remedies</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <h4 class="font-semibold text-gray-800 mb-2">Plant-Based Solutions</h4>
+                            <p class="text-sm text-gray-600">Neem oil, pyrethrum, and botanical insecticides from natural sources.</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <h4 class="font-semibold text-gray-800 mb-2">Homemade Sprays</h4>
+                            <p class="text-sm text-gray-600">Soap solutions, garlic sprays, and other DIY pest deterrents.</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <h4 class="font-semibold text-gray-800 mb-2">Companion Planting</h4>
+                            <p class="text-sm text-gray-600">Strategic plant combinations that naturally repel pests.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monitoring and Detection -->
+            <div class="bg-gradient-to-r from-red-500 to-pink-500 rounded-3xl p-8 md:p-12 text-white">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-6">Early Detection & Treatment</h3>
+                        <p class="text-lg mb-6 text-red-100">
+                            Learn professional monitoring techniques and early warning signs to catch pest problems before they become serious infestations.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">👀</span>
+                                <div>
+                                    <div class="font-semibold">Visual Inspection</div>
+                                    <div class="text-sm text-red-100">Regular field scouting and symptom identification</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">🎯</span>
+                                <div>
+                                    <div class="font-semibold">Targeted Treatment</div>
+                                    <div class="text-sm text-red-100">Precise application methods and timing</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">📊</span>
+                                <div>
+                                    <div class="font-semibold">Record Keeping</div>
+                                    <div class="text-sm text-red-100">Track treatments and effectiveness</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-2xl p-8 backdrop-blur-sm">
+                        <h4 class="text-2xl font-bold mb-6 text-center">Common Pest Warning Signs</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white bg-opacity-30 rounded-xl p-4 text-center">
+                                <div class="text-2xl mb-2">🍃</div>
+                                <div class="text-sm font-semibold">Leaf Damage</div>
+                                <div class="text-xs text-red-100">Holes, spots, yellowing</div>
+                            </div>
+                            <div class="bg-white bg-opacity-30 rounded-xl p-4 text-center">
+                                <div class="text-2xl mb-2">🐛</div>
+                                <div class="text-sm font-semibold">Insect Presence</div>
+                                <div class="text-xs text-red-100">Eggs, larvae, adults</div>
+                            </div>
+                            <div class="bg-white bg-opacity-30 rounded-xl p-4 text-center">
+                                <div class="text-2xl mb-2">💧</div>
+                                <div class="text-sm font-semibold">Plant Stress</div>
+                                <div class="text-xs text-red-100">Wilting, stunted growth</div>
+                            </div>
+                            <div class="bg-white bg-opacity-30 rounded-xl p-4 text-center">
+                                <div class="text-2xl mb-2">🕸️</div>
+                                <div class="text-sm font-semibold">Webbing/Residue</div>
+                                <div class="text-xs text-red-100">Webs, honeydew, frass</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Get Expert Agricultural Advice</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Connect with agricultural experts for personalized advice, troubleshooting, and advanced farming techniques.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Contact Form -->
+                <div class="bg-white rounded-3xl p-8 md:p-10 shadow-xl">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-8">Send Your Inquiry</h3>
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
+                                <input type="text" id="name" required 
+                                       class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-20 outline-none transition-all"
+                                       placeholder="Enter your full name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" id="phone"
+                                       class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-20 outline-none transition-all"
+                                       placeholder="Your phone number">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
+                            <input type="email" id="email" required
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-20 outline-none transition-all"
+                                   placeholder="your.email@example.com">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Subject/Topic</label>
+                            <select id="subject" 
+                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-20 outline-none transition-all">
+                                <option value="">Select a topic</option>
+                                <option value="crop-advice">Crop Growing Advice</option>
+                                <option value="pest-control">Pest Control Help</option>
+                                <option value="soil-issues">Soil and Fertilizer Issues</option>
+                                <option value="equipment">Farm Equipment Guidance</option>
+                                <option value="market-info">Market Information</option>
+                                <option value="other">Other Questions</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Your Message *</label>
+                            <textarea id="message" required rows="5"
+                                      class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-20 outline-none transition-all resize-none"
+                                      placeholder="Describe your farming question or concern in detail..."></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Attach Images/Documents (Optional)</label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-primary transition-colors">
+                                <input type="file" id="attachment" multiple accept="image/*,.pdf,.doc,.docx" class="hidden">
+                                <label for="attachment" class="cursor-pointer">
+                                    <div class="text-4xl text-gray-400 mb-2">📎</div>
+                                    <div class="text-sm text-gray-600">
+                                        <span class="text-primary font-semibold">Click to upload</span> or drag and drop
+                                    </div>
+                                    <div class="text-xs text-gray-400 mt-1">
+                                        Images, PDF, Word documents (Max 10MB)
+                                    </div>
+                                </label>
+                            </div>
+                            <div id="file-list" class="mt-3 space-y-2"></div>
+                        </div>
+
+                        <button type="submit" 
+                                class="w-full bg-gradient-to-r from-primary to-secondary text-white font-semibold py-4 rounded-xl hover:shadow-lg transition-all hover-scale">
+                            <span class="flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                </svg>
+                                Send Message
+                            </span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="space-y-8">
+                    <!-- Direct Contact -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Direct Contact</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-4">
+                                    <span class="text-white text-xl">📧</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-800">Email Support</div>
+                                    <div class="text-gray-600">support@agrihub.com</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mr-4">
+                                    <span class="text-white text-xl">📞</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-800">Expert Hotline</div>
+                                    <div class="text-gray-600">+1-800-AGRI-HELP</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center mr-4">
+                                    <span class="text-white text-xl">🕒</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-800">Support Hours</div>
+                                    <div class="text-gray-600">Mon-Sat: 8AM-6PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agricultural Extension Services -->
+                    <div class="bg-gradient-to-br from-primary to-secondary rounded-2xl p-8 text-white">
+                        <h3 class="text-2xl font-bold mb-6">Agricultural Extension Services</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">🎓</span>
+                                <div>
+                                    <div class="font-semibold">Expert Consultations</div>
+                                    <div class="text-sm text-green-100">One-on-one sessions with certified agricultural experts</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">🚜</span>
+                                <div>
+                                    <div class="font-semibold">On-Site Visits</div>
+                                    <div class="text-sm text-green-100">Field assessments and personalized recommendations</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">📚</span>
+                                <div>
+                                    <div class="font-semibold">Training Programs</div>
+                                    <div class="text-sm text-green-100">Workshops and courses on modern farming techniques</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl mr-3">🌐</span>
+                                <div>
+                                    <div class="font-semibold">Online Support</div>
+                                    <div class="text-sm text-green-100">24/7 access to our knowledge base and forums</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Help -->
+                    <div class="bg-red-50 border-2 border-red-200 rounded-2xl p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3">🚨</span>
+                            <h4 class="text-xl font-bold text-red-800">Emergency Agricultural Support</h4>
+                        </div>
+                        <p class="text-red-700 mb-4">
+                            For urgent pest outbreaks, crop diseases, or severe weather damage, contact our emergency response team:
+                        </p>
+                        <div class="bg-red-100 rounded-lg p-4 text-center">
+                            <div class="font-bold text-red-800 text-lg">Emergency Hotline</div>
+                            <div class="text-red-600">+1-800-CROP-911</div>
+                            <div class="text-sm text-red-600 mt-1">Available 24/7</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">🌾</span>
+                        </div>
+                        <span class="text-2xl font-bold">AgriHub</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Empowering farmers with comprehensive agricultural information, expert guidance, and sustainable farming solutions.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                            <span>📘</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                            <span>🐦</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                            <span>📸</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                            <span>📺</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <div class="space-y-3">
+                        <a href="#guides" class="block text-gray-400 hover:text-primary transition-colors">Farming Guides</a>
+                        <a href="#crops" class="block text-gray-400 hover:text-primary transition-colors">Crop Information</a>
+                        <a href="#pest-control" class="block text-gray-400 hover:text-primary transition-colors">Pest Control</a>
+                        <a href="#contact" class="block text-gray-400 hover:text-primary transition-colors">Expert Contact</a>
+                    </div>
+                </div>
+
+                <!-- Resources -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Resources</h3>
+                    <div class="space-y-3">
+                        <a href="#" class="block text-gray-400 hover:text-primary transition-colors">Weather Updates</a>
+                        <a href="#" class="block text-gray-400 hover:text-primary transition-colors">Market Prices</a>
+                        <a href="#" class="block text-gray-400 hover:text-primary transition-colors">Government Schemes</a>
+                        <a href="#" class="block text-gray-400 hover:text-primary transition-colors">Training Programs</a>
+                        <a href="#" class="block text-gray-400 hover:text-primary transition-colors">Research Papers</a>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Stay Updated</h3>
+                    <p class="text-gray-400 mb-4">Get weekly farming tips and market updates delivered to your inbox.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Enter your email" 
+                               class="flex-1 px-4 py-2 rounded-l-lg bg-gray-800 border border-gray-700 focus:border-primary focus:outline-none text-white">
+                        <button class="bg-primary px-4 py-2 rounded-r-lg hover:bg-secondary transition-colors">
+                            <span>✉️</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 mb-4 md:mb-0">
+                        © 2024 Agricultural Information Hub. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full shadow-lg hover:bg-secondary transition-all hover-scale hidden">
+        <span class="text-xl">↑</span>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Contact form handling
+        const contactForm = document.getElementById('contact-form');
+        const fileInput = document.getElementById('attachment');
+        const fileList = document.getElementById('file-list');
+
+        // File upload handling
+        fileInput.addEventListener('change', function(e) {
+            fileList.innerHTML = '';
+            Array.from(this.files).forEach((file, index) => {
+                const fileDiv = document.createElement('div');
+                fileDiv.className = 'flex items-center justify-between bg-gray-100 rounded-lg p-3';
+                fileDiv.innerHTML = `
+                    <div class="flex items-center">
+                        <span class="text-sm text-gray-600 mr-2">📄</span>
+                        <span class="text-sm text-gray-800">${file.name}</span>
+                        <span class="text-xs text-gray-500 ml-2">(${(file.size/1024).toFixed(1)}KB)</span>
+                    </div>
+                    <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700">
+                        <span class="text-sm">✕</span>
+                    </button>
+                `;
+                fileList.appendChild(fileDiv);
+            });
+        });
+
+        // Remove file function
+        window.removeFile = function(index) {
+            const dt = new DataTransfer();
+            const files = Array.from(fileInput.files);
+            files.splice(index, 1);
+            files.forEach(file => dt.items.add(file));
+            fileInput.files = dt.files;
+            fileInput.dispatchEvent(new Event('change'));
+        };
+
+        // Form submission
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Simple validation
+            if (!formData.name || !formData.email || !formData.message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Simulate form submission
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="flex items-center justify-center"><span class="animate-spin mr-2">⏳</span>Sending...</span>';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                alert('Thank you for your message! Our agricultural experts will get back to you within 24 hours.');
+                contactForm.reset();
+                fileList.innerHTML = '';
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.pageYOffset > 50) {
+                nav.classList.add('bg-white', 'shadow-lg');
+            } else {
+                nav.classList.remove('bg-white', 'shadow-lg');
+            }
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
